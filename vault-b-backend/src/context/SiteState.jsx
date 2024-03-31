@@ -6,7 +6,7 @@ const SiteState = (Props)=>{
   const [displayData, setDisplayData] = useState({
     data: null,
   });
-    const host="http://localhost:3001"
+    const host="http://localhost:3002"
     const [loginStat,setLoginStat]=useState(false)
     const [alerts,setAlerts]=useState(null);
     const handleAlerts=(msg,typo)=>{
