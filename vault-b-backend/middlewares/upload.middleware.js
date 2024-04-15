@@ -4,8 +4,12 @@ import path from 'path';
 import fs from 'fs';
 
 const directory = '/var/task/vault-b-backend/middlewares/public/temp/';
-if (!fs.existsSync(directory)) {
+
+try {
     fs.mkdirSync(directory, { recursive: true });
+    console.log('Directory created successfully:', directory);
+} catch (err) {
+    console.error('Error creating directory:', err);
 }
 
 const __filename = fileURLToPath(import.meta.url);
