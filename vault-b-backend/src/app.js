@@ -6,7 +6,7 @@ app.use(express.json({limit:"36kb"}))
 app.use(express.static("public"));
 app.use(
     cors({
-      origin: "http://localhost:5173",
+      origin: "https://vault-b.netlify.app/",
       credentials: true
     })
   );
