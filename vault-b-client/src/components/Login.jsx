@@ -30,7 +30,6 @@ const Login = () => {
   // });
   const handleFormData = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
-    console.log(formData);
   };
 
   const handleSubmit = async (event) => {
@@ -53,6 +52,7 @@ const Login = () => {
         });
         const data = await response.json();
         if (response.status == "200") {
+          connectWallet();
           loader.load = false;
           loader.sign = true;
           setLoader({ ...loader });
@@ -74,7 +74,6 @@ const Login = () => {
         }
       }
     } catch (err) {
-      console.log(err);
       handleAlerts("something went bad / wrong credentials", "danger");
     }
     loader.load = false;
@@ -83,6 +82,7 @@ const Login = () => {
 
   useEffect(() => {
     if (localStorage.getItem("data")) {
+      connectWallet();
       loader.sign = true;
       setLoader({ ...loader });
       async function display() {
@@ -108,8 +108,6 @@ const Login = () => {
 
   const requestAccount = async () => {
     if (window.ethereum) {
-      console.log("metamask exist");
-
       try {
         const accounts = await window.ethereum.request({
           method: "eth_requestAccounts",
@@ -144,7 +142,6 @@ const Login = () => {
 
       //   const provider = new ethers.providers.Web3Provider(window.ethereum);
       const provider = new ethers.BrowserProvider(window.ethereum);
-      console.log(provider);
     } else {
       handleAlerts("Please install MetaMask", "warning");
     }
@@ -152,80 +149,90 @@ const Login = () => {
 
   return (
     <>
-      
-
       {/* cards */}
       {localStorage.getItem("data") ? (
-
         <div>
           <nav className="navbar navbar-expand-lg navbar-light bg-body-tertiary">
-        {/* <!-- Container wrapper --> */}
-        <div className="container-fluid">
-          {/* <!-- Toggle button --> */}
-          <button
-            data-mdb-collapse-init
-            className="navbar-toggler"
-            type="button"
-            data-mdb-target="#navbarCenteredExample"
-            aria-controls="navbarCenteredExample"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <i className="fas fa-bars"></i>
-          </button>
+            {/* <!-- Container wrapper --> */}
+            <div className="container-fluid">
+              {/* <!-- Toggle button --> */}
+              <button
+                data-mdb-collapse-init
+                className="navbar-toggler"
+                type="button"
+                data-mdb-target="#navbarCenteredExample"
+                aria-controls="navbarCenteredExample"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <i className="fas fa-bars"></i>
+              </button>
 
-          {/* <!-- Collapsible wrapper --> */}
-          <div
-            className="collapse navbar-collapse justify-content-center"
-            id="navbarCenteredExample"
-          >
-            {/* <!-- Left links --> */}
-            <ul className="navbar-nav mb-2 mb-lg-0">
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
-                  Home
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  type="button"
-                  className="nav-link "
-                  onClick={connectWallet}
-                >{walletAddress!=='null'?"Wallet connected":"Connect wallet"}
-                </a>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link " to={"/history"}>
-                  History
-                </Link>
-              </li>
-              
-            </ul>
-            {/* <!-- Left links --> */}
-          </div>
-          {/* <!-- Collapsible wrapper --> */}
-        </div>
-        {/* <!-- Container wrapper --> */}
-      </nav>
-        <div className="container my-3  " style={{minHeight:"100vh"}}>
-          {loader.sign ? (
-            <div className="d-flex justify-content-center align-iteams-center">
-              {" "}
-              <Spinner />
+              {/* <!-- Collapsible wrapper --> */}
+              <div
+                className="collapse navbar-collapse justify-content-center"
+                id="navbarCenteredExample"
+              >
+                {/* <!-- Left links --> */}
+                <ul className="navbar-nav mb-2 mb-lg-0">
+                  <li className="nav-item">
+                    <a className="nav-link active" aria-current="page" href="#">
+                      Home
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a
+                      type="button"
+                      className="nav-link "
+                      onClick={connectWallet}
+                    >
+                      {walletAddress !== "null"
+                        ? "Wallet connected"
+                        : "Connect wallet"}
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link " to={"/history"}>
+                      History
+                    </Link>
+                  </li>
+                </ul>
+                {/* <!-- Left links --> */}
+              </div>
+              {/* <!-- Collapsible wrapper --> */}
             </div>
-          ) : (
-            <div className="row ">
-              {displayData.data &&
-                displayData.data.map((obj) => {
-                  return (
-                    <div className="col-md-3" key={obj.fileurl}>
-                      <FileCard obj={obj} />
+            {/* <!-- Container wrapper --> */}
+          </nav>
+          <div className="container my-3  " style={{ minHeight: "100vh" }}>
+            {loader.sign ? (
+              <div className="d-flex justify-content-center align-iteams-center">
+                {" "}
+                <Spinner />
+              </div>
+            ) : (
+              <div className=" container  ">
+                <div className="row ">
+                  {displayData.data && displayData.data[0] ? (
+                    displayData.data?.map((obj) => {
+                      return (
+                        <div className="col-md-3 ml-5" key={obj.fileurl}>
+                          <FileCard obj={obj} />
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div
+                      className="d-flex justify-content-center align-iteams-center"
+                      style={{ marginTop: "10rem" }}
+                    >
+                      <h1>Start uploading</h1>
                     </div>
-                  );
-                })}
-            </div>
-          )}
-        </div></div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
       ) : (
         <div className="container px-4 px-lg-5 my-5">
           <div className="row gx-4 gx-lg-5 align-items-center">
@@ -251,8 +258,9 @@ const Login = () => {
                     <div className="form-group first">
                       <label htmlFor="username">Email</label>
                       <input
+                        required
                         onChange={handleFormData}
-                        type="text"
+                        type="email"
                         className="form-control"
                         name="email"
                         style={{
@@ -266,8 +274,9 @@ const Login = () => {
                     <div className="form-group last mb-4">
                       <label htmlFor="password">Password</label>
                       <input
+                        required
                         onChange={handleFormData}
-                        type="text"
+                        type="password"
                         className="form-control"
                         name="password"
                         style={{

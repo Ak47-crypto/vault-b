@@ -42,7 +42,6 @@ const Navbar = () => {
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
-    console.log(event.target.files[0]);
   };
 
   const handleSubmit = async (event) => {
@@ -50,7 +49,7 @@ const Navbar = () => {
     loader.load = true;
     setLoader({ ...loader });
     if (!file) {
-      console.error("No file selected");
+      
       handleAlerts("No file selected", "warning");
       loader.load = false;
       setLoader({ ...loader });
@@ -59,7 +58,6 @@ const Navbar = () => {
 
     const formData = new FormData();
     formData.append("file", file);
-    console.log(file);
     const response = await fetch(`${host}/api/v1/user/upload`, {
       method: "POST",
       credentials: "include",
@@ -83,8 +81,9 @@ const Navbar = () => {
       handleAlerts("file uploaded successfully", "warning");
       const fileHash = await generateHash(file);
       setHash(fileHash)
-      await fileAdd();  
-      console.log(fileHash)
+      
+      await fileAdd(fileHash);  
+      
     }
     loader.load = false;
     setLoader({ ...loader });
@@ -113,7 +112,7 @@ const generateHash = async (file) => {
     });
 }
 // web3
-const fileAdd = async () => {
+const fileAdd = async (file_hash) => {
   
   if(window.ethereum){
     
@@ -121,7 +120,8 @@ const fileAdd = async () => {
       const provider = new ethers.BrowserProvider(window.ethereum)
       const signer = await provider.getSigner(walletAddress)
       const addFile = new ethers.Contract(contractAdd, abi.abi, signer)
-      await addFile.uploadFile(file.name,hash)
+      
+      await addFile.uploadFile(file.name,file_hash)
   }
   catch (err) {
       if (err.code === 'INVALID_ARGUMENT'&&String(err.value)==='NaN'){
@@ -129,7 +129,7 @@ const fileAdd = async () => {
       }
       else 
           handleAlerts(`${err}`, 'warning')
-        console.log(err)
+       
   }
 
 }
@@ -262,14 +262,14 @@ else
                   aria-label="Close"
                 ></button>
               </div>
-              <form enctype="multipart/form-data">
+              <form encType="multipart/form-data">
                 <div className="modal-body d-flex justify-content-center">
-                  <div class="mb-3">
-                    <label for="formFile" class="form-label">
+                  <div className="mb-3">
+                    <label htmlFor="formFile" className="form-label">
                       Default name will be use
                     </label>
                     <input
-                      class="form-control"
+                      className="form-control"
                       type="file"
                       id="formFile"
                       name="file"

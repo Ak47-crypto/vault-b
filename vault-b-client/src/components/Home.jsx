@@ -31,7 +31,7 @@ const Home = () => {
                   type="button"
                 >
                   {localStorage.getItem('data')||loginStat?<Link  to="/login" style={{textDecoration:"none",color:"black"}}>Got to Dashboard</Link>:
-                  <Link class="bi-cart-fill me-1" to="/signup" style={{textDecoration:"none",color:"black"}}>Sign Up</Link>}
+                  <Link className="bi-cart-fill me-1" to="/signup" style={{textDecoration:"none",color:"black"}}>Sign Up</Link>}
                 </button>
               </div>
             </div>

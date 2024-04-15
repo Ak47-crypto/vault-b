@@ -1,8 +1,8 @@
 import SiteContext from "./SiteContext";
 import { useState } from "react";
 const SiteState = (Props)=>{
-  const [walletAddress,setWalletAddress]=useState('null')
-  const contractAdd='0x5fbdb2315678afecb367f032d93f642f64180aa3'
+  const [walletAddress,setWalletAddress]=useState(null)
+  const contractAdd='0x4eD4Da2DDa2ABD05dBFaFcf79134442f73CA82e8'
   const [displayData, setDisplayData] = useState({
     data: null,
   });
