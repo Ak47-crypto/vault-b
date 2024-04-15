@@ -3,7 +3,10 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import fs from 'fs';
 
-const directory = '/var/task/vault-b-backend/middlewares/';
+const directory = '/var/task/vault-b-backend/middlewares/public/temp/';
+if (!fs.existsSync(directory)) {
+    fs.mkdirSync(directory, { recursive: true });
+}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
