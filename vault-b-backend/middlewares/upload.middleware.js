@@ -3,7 +3,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import fs from 'fs';
 
-const directory = '/var/task/vault-b-backend/middlewares/public/temp/';
+const directory = '/var/task/vault-b-backend/middlewares/public';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -11,9 +11,9 @@ const storage = multer.diskStorage({
     destination:function (req,file,cb){
         cb(null,path.join(__dirname, 'public', 'temp'))
         if (fs.existsSync(directory))
-        console.log("temp folder exist")
+        console.log(" folder exist",directory)
         else
-        console.log("not exist");
+        console.log("not exist",directory);
     },
     filename:function(req,file,cb){
         cb(null,file.originalname)
