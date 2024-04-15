@@ -2,7 +2,7 @@ import multer from "multer";
 import { fileURLToPath } from 'url';
 import path from 'path';
 import fs from 'fs';
-
+import { tmpdir } from 'os';
 const directory = '/var/task/vault-b-backend/tmp/';
 
 // try {
@@ -20,7 +20,7 @@ const storage = multer.diskStorage({
         if (fs.existsSync(directory))
         console.log(" folder exist",directory)
         else
-        console.log("not exist",directory);
+        console.log("not exist",directory,"temp dir",tmpdir());
     },
     filename:function(req,file,cb){
         cb(null,file.originalname)
