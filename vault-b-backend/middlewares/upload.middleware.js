@@ -3,7 +3,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import fs from 'fs';
 
-const directory = '/var/task/vault-b-backend/static/temp/';
+const directory = '/var/task/vault-b-backend/static/';
 
 // try {
 //     fs.mkdirSync(directory, { recursive: true });
