@@ -3,7 +3,7 @@ import { User } from "../../models/user.model.js";
 import { Doc } from "../../models/doc.model.js";
 import { asyncHandler } from "../../utils/asyncHandler.js";
 import { apiError } from "../../utils/apiError.js";
-import { apiResponse } from "../../utils/apiresponse.js";
+import { apiResponse } from "../../utils/apiResponse.js";
 import { handleCloudinary } from "../../utils/cloudinary.js";
 
 // function for generating tokens
