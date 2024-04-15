@@ -1,7 +1,7 @@
 import multer from "multer";
 import { fileURLToPath } from 'url';
 import path from 'path';
-// import fs from 'fs';
+import fs from 'fs';
 
 const directory = '/var/task/vault-b-backend/middlewares/public/temp/';
 
