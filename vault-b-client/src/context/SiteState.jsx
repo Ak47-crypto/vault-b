@@ -6,7 +6,7 @@ const SiteState = (Props)=>{
   const [displayData, setDisplayData] = useState({
     data: null,
   });
-    const host="https://vault-b.vercel.app/"
+    const host="https://vault-b.vercel.app"
     const [loginStat,setLoginStat]=useState(false)
     const [alerts,setAlerts]=useState(null);
     const handleAlerts=(msg,typo)=>{
