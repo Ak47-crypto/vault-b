@@ -3,7 +3,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import fs from 'fs';
 
-const directory = '/var/task/vault-b-backend/middlewares/public';
+const directory = '/var/task/vault-b-backend/middlewares/';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
