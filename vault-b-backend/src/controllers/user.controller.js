@@ -50,6 +50,7 @@ const login = asyncHandler(async (req, res, next) => {
   const options = {
     httpOnly: true,
     secure: true,
+    sameSite:"none"
   };
   user.password = null;
   res
