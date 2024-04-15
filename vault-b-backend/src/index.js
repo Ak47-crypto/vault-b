@@ -1,4 +1,5 @@
 import "dotenv/config";
+import { tmpdir } from 'os';
 import express from 'express'
 import  connectDb  from "./db/index.db.js";
 import { app } from "./app.js";
