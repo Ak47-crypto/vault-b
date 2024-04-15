@@ -17,7 +17,7 @@ const authMiddleware = asyncHandler(async (req, res, next) => {
     next();
   } catch (err) {
     console.log(err);
-    throw new apiError(500, err?.message || "Internal Server Error");
+    throw new apiError(500, err?.message || "Internal Server Error in auth");
   }
 });
 export { authMiddleware };
