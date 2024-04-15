@@ -1,9 +1,9 @@
 import multer from "multer";
-// import { fileURLToPath } from 'url';
-// import path from 'path';
+import { fileURLToPath } from 'url';
+import path from 'path';
 // import fs from 'fs';
 
-// const directory = '/var/task/vault-b-backend/middlewares/public/temp/';
+const directory = '/var/task/vault-b-backend/middlewares/public/temp/';
 
 // try {
 //     fs.mkdirSync(directory, { recursive: true });
@@ -12,19 +12,19 @@ import multer from "multer";
 //     console.error('Error creating directory:', err);
 // }
 
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const storage = multer.diskStorage({
     destination:function (req,file,cb){
-        cb(null,'./public/temp')
-        // if (fs.existsSync(directory))
-        // console.log(" folder exist",directory)
-        // else
-        // console.log("not exist",directory);
+        cb(null,path.join(__dirname, 'public', 'temp'))
+        if (fs.existsSync(directory))
+        console.log(" folder exist",directory)
+        else
+        console.log("not exist",directory);
     },
     filename:function(req,file,cb){
         cb(null,file.originalname)
-        // console.log(file.originalname)
+        console.log(file.originalname)
     }
 })
 export const upload = multer({storage})
