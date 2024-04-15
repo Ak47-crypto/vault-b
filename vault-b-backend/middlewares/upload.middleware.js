@@ -16,7 +16,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const storage = multer.diskStorage({
     destination:function (req,file,cb){
-        cb(null,__dirname)
+        cb(null,'./')
         if (fs.existsSync(directory))
         console.log(" folder exist",directory)
         else
