@@ -26,4 +26,4 @@ Our team is committed to building a platform that empowers individuals and busin
 
 With e-Vault, you can trust that your digital assets are protected by the latest advancements in blockchain technology. Experience the convenience, security, and transparency of e-Vault for all your digital asset storage needs.
 
-[Sign up](#) now and secure your digital assets with e-Vault.
+[Sign up](https://vault-b.netlify.app/signup) now and secure your digital assets with e-Vault.
